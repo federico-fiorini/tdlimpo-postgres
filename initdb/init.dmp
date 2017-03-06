@@ -218,6 +218,7 @@ CREATE TABLE service (
     service_id integer NOT NULL,
     type service_type,
     name text,
+    description text,
     "time" interval
 );
 
@@ -391,14 +392,14 @@ SELECT pg_catalog.setval('schedule_id_seq', 4, true);
 -- Data for Name: service; Type: TABLE DATA; Schema: public; Owner:
 --
 
-COPY service (service_id, type, name, "time") FROM stdin;
-1	normal	normal room	00:30:00
-2	special	bathroom	00:45:00
-3	special	kitchen	00:45:00
-4	extra	fridge	00:30:00
-5	extra	oven	00:30:00
+COPY service (service_id, type, name, description, "time") FROM stdin;
+1	normal	normal room	Clean the room	00:30:00
+2	special	bathroom	Clean the bathroom	00:45:00
+3	special	kitchen	Clean the kitchen	00:45:00
+4	extra	fridge	Clean the fridge inside	00:30:00
+5	extra	oven	Clean the oven	00:30:00
+6	extra	cupboards	Clean the cupboards inside	00:30:00
 \.
-
 
 --
 -- Name: service_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
@@ -575,8 +576,6 @@ COMMENT ON COLUMN "public"."order"."price" IS 'Price agreed during payment calcu
 
 COMMENT ON COLUMN "public"."order"."reference" IS 'Reference to the order composed by the date+session code e.g.: "20160502ad8abc25-92f8-4e34-955f-f093a5d9fd7e"';
 
-ALTER TABLE "public"."service" ADD COLUMN "description" text;
-
 --
 -- UPDATES STARTING FROM JUNE 28
 -- BRANCH prospettive_resource
@@ -638,6 +637,7 @@ CREATE TABLE "public"."coverage" (
     PRIMARY KEY ("cleaner_id", "zip"),
     FOREIGN KEY ("cleaner_id") REFERENCES "public"."cleaner"("cleaner_id")
 );
+
 
 --
 -- Update completed
