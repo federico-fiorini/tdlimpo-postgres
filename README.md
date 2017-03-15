@@ -7,9 +7,6 @@ Starting from an empty Posgres docker image and init the database with schema.
 
 	./start-docker-compose.sh
 	
-#### How to update image
+#### How to update local image
 
-	docker build -t tdlimpo-postgres .
-	docker tag tdlimpo-postgres federicofiorini/tdlimpo-postgres
-	docker push federicofiorini/tdlimpo-postgres
-	
+	./start-docker-compose.sh update
